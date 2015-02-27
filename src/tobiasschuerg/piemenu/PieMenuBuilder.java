@@ -22,7 +22,10 @@ import java.util.List;
  */
 public class PieMenuBuilder {
 
-    public static final String MAIN_BUTTON = "pie.menu.main.button";
+    public static final String PANEL_ID = "Panel_ID";
+    public static final String LAYER_ID = "Layer_ID";
+    public static final String MAIN_BUTTON_ID = "pie.menu.main.button";    
+    
     private final ScreenBuilder mScreenBuilder;
     private final Nifty mNifty;
     private String mTextMainButton;
@@ -38,14 +41,14 @@ public class PieMenuBuilder {
     }
 
     public Screen build() {
-        mScreenBuilder.layer(new LayerBuilder("Layer_ID") {
+        mScreenBuilder.layer(new LayerBuilder(LAYER_ID) {
+            
             {
                 childLayoutVertical(); // layer properties, add more...
                 childLayoutCenter();
                 visibleToMouse(true);
 
-                // <panel>
-                panel(new PanelBuilder("Panel_ID") {
+                panel(new PanelBuilder(PANEL_ID) {
                     {
                         childLayoutCenter(); // panel properties, add more...                                  
                         height("60%");
@@ -53,7 +56,7 @@ public class PieMenuBuilder {
                         interactOnClickMouseMove("checkMouse()");
 
                         // Main Button
-                        control(new ButtonBuilder(MAIN_BUTTON, mTextMainButton) {
+                        control(new ButtonBuilder(MAIN_BUTTON_ID, mTextMainButton) {
                             {
                                 alignCenter();
                                 valignCenter();
@@ -67,8 +70,7 @@ public class PieMenuBuilder {
                         }
 
                     }
-                });
-                // </panel>
+                }); // panel
             }
         });
         return mScreenBuilder.build(mNifty);

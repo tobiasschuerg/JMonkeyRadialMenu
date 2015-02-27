@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  *
- * @author Tobias
+ * @author Tobias Schürg
  */
 public class PieMenuController extends AbstractAppState implements ScreenController {
 
