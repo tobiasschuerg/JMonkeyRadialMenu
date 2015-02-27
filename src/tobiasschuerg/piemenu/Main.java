@@ -1,22 +1,17 @@
-package mygame;
+package tobiasschuerg.piemenu;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.builder.HoverEffectBuilder;
 import de.lessvoid.nifty.builder.LayerBuilder;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.builder.ScreenBuilder;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
-import de.lessvoid.nifty.screen.DefaultScreenController;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.Color;
 
 /**
@@ -27,8 +22,6 @@ import de.lessvoid.nifty.tools.Color;
 public class Main extends SimpleApplication {
     
     public static final String MAIN_BUTTON = "main_button";
-
-    private Nifty nifty;
 
     public static void main(String[] args) {
         Main app = new Main();

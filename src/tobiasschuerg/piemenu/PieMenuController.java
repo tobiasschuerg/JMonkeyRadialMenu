@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mygame;
+package tobiasschuerg.piemenu;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -22,21 +22,15 @@ import java.util.List;
  */
 public class PieMenuController extends AbstractAppState implements ScreenController {
 
-    private Application app;
     private Nifty nifty;
-    private Screen screen;
     private List<Element> layers;
     private List<Element> panels;
     private List<Element> controls;
     private Element closest;
-    private int initialWith = 0;
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
-        super.initialize(stateManager, app); //To change body of generated methods, choose Tools | Templates.
-        this.app = app;
-        
-        
+        super.initialize(stateManager, app);    
     }
 
     @Override
@@ -77,40 +71,22 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
 
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
-        this.screen = nifty.getScreen("piemenu");
         this.layers = screen.getLayerElements();
         this.panels = layers.get(0).getElements();
 
         this.controls = panels.get(0).getElements();
-        setClosestControl(controls.get(0));
-        initialWith = 50;
-                
-        
+        setClosestControl(controls.get(0));  
     }
 
     public void onStartScreen() {
-        
-        
+
     }
 
     public void onEndScreen() {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void checkMouse() {
-        if (nifty != null) {
-
-            int x = nifty.getNiftyMouse().getX();
-            int y = nifty.getNiftyMouse().getY();
-            //if (cursor != null) {
-            System.out.println("Nifty Cursor at: " + x + ", " + y);
-
-            int i = 0;
-
-
-
-            //}
-        }
+    public void checkMouse() { 
         // app.stop();
     }
 
