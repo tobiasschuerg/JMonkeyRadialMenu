@@ -22,6 +22,9 @@ import de.lessvoid.nifty.tools.Color;
 public class Main extends SimpleApplication {
     
     public static final String MAIN_BUTTON = "main_button";
+    public static final String PIE_MENU_ID = "pie.menu";
+    public static final String SCREEN_ID = "pie.menu.screen";
+    
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -52,89 +55,20 @@ public class Main extends SimpleApplication {
         flyCam.setDragToRotate(true);        
         
         nifty.loadStyleFile("nifty-default-styles.xml");
-        nifty.loadControlFile("nifty-default-controls.xml");
+        nifty.loadControlFile("nifty-default-controls.xml");              
         
-        final PieMenuController pieMenuController = new PieMenuController();
-        getStateManager().attach(pieMenuController);
-        
+        PieMenuBuilder menu = new PieMenuBuilder(nifty, PIE_MENU_ID);
+        menu.addButton("Translate");
+        menu.addButton("Rotate");
+        menu.addButton("Scale");
+
         // <screen>
-        nifty.addScreen("piemenu", new ScreenBuilder("Hello Nifty Screen") {
-            {
-                controller(pieMenuController); // Screen properties       
-                
-
-                // <layer>
-                layer(new LayerBuilder("Layer_ID") {
-                    {
-                        childLayoutVertical(); // layer properties, add more...
-                        childLayoutCenter();
-                        visibleToMouse(true);
-                        
-
-                        // <panel>
-                        panel(new PanelBuilder("Panel_ID") {
-                            
-                            {
-                                childLayoutCenter(); // panel properties, add more...                                  
-                                height("60%");
-                                width("60%");
-                                interactOnClickMouseMove("checkMouse()");
-
-                                // GUI elements
-                                control(new ButtonBuilder(MAIN_BUTTON, "Menu") {
-                                    {
-                                        alignCenter();
-                                        valignCenter();
-                                        height("15%");
-                                        width("15%");                                                                                
-                                    }
-                                });
-                                
-                                control(new ButtonBuilder("option_button1", "Option 1") {
-                                    {
-                                        alignLeft();
-                                        valignTop();
-                                        height("15%");
-                                        width("15%");
-                                        backgroundColor(Color.randomColor());
-                                    }
-                                });
-                                
-                                control(new ButtonBuilder("option_button2", "Option 2") {
-                                    {
-                                        alignCenter();
-                                        valignTop();
-                                        height("15%");
-                                        width("15%");
-                                        backgroundColor(Color.randomColor());
-                                    }
-                                });
-                                
-                                control(new ButtonBuilder("option_button3", "Option 3") {
-                                    {
-                                        alignRight();
-                                        valignTop();
-                                        height("15%");
-                                        width("15%");
-                                        backgroundColor(Color.randomColor());
-                                    }
-                                });
-
-                                //.. add more GUI elements here              
-
-                            }
-                        });
-                        // </panel>
-                    }
-                });
-                // </layer>
-            }
-        }.build(nifty));
-        // </screen>
+        nifty.addScreen(SCREEN_ID, menu.build());
+        getStateManager().attach(menu.getController());
 
         // nifty.registerMouseCursor("hand", "Interface/mouse-cursor-hand.png", 5, 4);
         // nifty.setDebugOptionPanelColors(true);
-        nifty.gotoScreen("piemenu"); // start the screen
+        nifty.gotoScreen(SCREEN_ID); // start the screen
     }
 
     @Override
