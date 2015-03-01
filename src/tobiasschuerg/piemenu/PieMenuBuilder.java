@@ -50,9 +50,10 @@ public class PieMenuBuilder {
 
                 panel(new PanelBuilder(PANEL_ID) {
                     {
-                        childLayoutCenter(); // panel properties, add more...                                  
-                        height("60%");
-                        width("60%");
+                        childLayoutCenter();
+                        
+                        height("80%");
+                        width("60%");                        
                         interactOnClickMouseMove("checkMouse()");
 
                         // Main Button
@@ -65,9 +66,15 @@ public class PieMenuBuilder {
                             }
                         });
 
-                        for (ControlBuilder cb : buttons) {
-                            control(cb);
-                        }
+                        panel(new PanelBuilder("OPTIONS") {
+                            {
+                                childLayoutAbsoluteInside();
+                                for (ControlBuilder cb : buttons) {
+                                    control(cb);
+                                }
+                            }
+                        });
+
 
                     }
                 }); // panel
@@ -91,24 +98,15 @@ public class PieMenuBuilder {
         buttons.add(new ButtonBuilder("button_" + name, name) {
             {
                 height("15%");
-                width("15%");
+                width("20%");
                 
                 backgroundColor(Color.randomColor());
-                
+                               
                 switch (buttonCount) {
-                    case 1: alignLeft(); break;
-                    case 2: alignCenter(); break;
-                    case 3: alignRight(); break;
-                }
-                
-                valign(VAlign.Top);
-                //alignCenter(); // works but I need more than three options
-                
-                // align(Align.valueOf("10px")); // IllegalArgumentException
-                
-                // x("10px"); // does nothing
-                
-                // set("x", "10px"); // does nothing                    
+                    case 1: x("0%");y("20%"); break;
+                    case 2: x("40%");y("0%"); break;
+                    case 3: x("90%");y("20%"); break;
+                }             
             }
         });
     }

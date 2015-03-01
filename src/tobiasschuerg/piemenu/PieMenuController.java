@@ -25,7 +25,7 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
     private Nifty nifty;
     private List<Element> layers;
     private List<Element> panels;
-    private List<Element> controls;
+    private List<Element> buttons;
     private Element closest;
 
     @Override
@@ -35,12 +35,12 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
 
     @Override
     public void update(float tpf) {
-        if (controls != null) {
+        if (buttons != null) {
 
             Vector2f cursor  = new Vector2f(nifty.getNiftyMouse().getX(), nifty.getNiftyMouse().getY());
 
             float dist = cursor.distance(getElementCenter(closest));
-            for (Element c : controls) {
+            for (Element c : buttons) {
 
                 Vector2f controlPosition = getElementCenter(c);
                 float dist2 = cursor.distance(controlPosition);
@@ -73,8 +73,9 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
         this.nifty = nifty;
         this.layers = screen.getLayerElements();
         this.panels = layers.get(0).getElements();
-
-        this.controls = panels.get(0).getElements();
+        
+        List<Element> controls = panels.get(0).getElements();
+        this.buttons = controls.get(1).getElements();
         setClosestControl(controls.get(0));  
     }
 

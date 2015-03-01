@@ -67,7 +67,7 @@ public class Main extends SimpleApplication {
         getStateManager().attach(menu.getController());
 
         // nifty.registerMouseCursor("hand", "Interface/mouse-cursor-hand.png", 5, 4);
-        // nifty.setDebugOptionPanelColors(true);
+        nifty.setDebugOptionPanelColors(true);
         nifty.gotoScreen(SCREEN_ID); // start the screen
     }
 
