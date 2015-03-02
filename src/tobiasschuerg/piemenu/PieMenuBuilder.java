@@ -32,10 +32,10 @@ public class PieMenuBuilder {
     private final PieMenuController mController;
     private List<ControlBuilder> buttons;
 
-    public PieMenuBuilder(Nifty nifty, String id) {
+    public PieMenuBuilder(Nifty nifty, String id, PieMenu pieMenu) {
         this.mTextMainButton = "Menu";
         mNifty = nifty;
-        mController = new PieMenuController();
+        mController = new PieMenuController(pieMenu);
         mScreenBuilder = new ScreenBuilder(id, mController);
         buttons = new ArrayList<ControlBuilder>();
     }
@@ -61,8 +61,8 @@ public class PieMenuBuilder {
                             {
                                 alignCenter();
                                 valignCenter();
-                                height("15%");
-                                width("15%");
+                                height("40");
+                                width("60");
                             }
                         });
 
@@ -93,7 +93,7 @@ public class PieMenuBuilder {
 
     int buttonCount = 0;
     
-    public void addButton(String name) {
+    public void addButton(final String name) {
         buttonCount++;
         buttons.add(new ButtonBuilder("button_" + name, name) {
             {
@@ -106,7 +106,9 @@ public class PieMenuBuilder {
                     case 1: x("0%");y("20%"); break;
                     case 2: x("40%");y("0%"); break;
                     case 3: x("90%");y("20%"); break;
-                }             
+                }   
+                
+                interactOnClick("onButtonClicked(" + name + ")");
             }
         });
     }

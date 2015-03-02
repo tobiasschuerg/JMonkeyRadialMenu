@@ -20,13 +20,18 @@ import java.util.List;
  *
  * @author Tobias Schürg
  */
-public class PieMenuController extends AbstractAppState implements ScreenController {
+public class PieMenuController extends AbstractAppState implements ScreenController, PieMenu {
 
     private Nifty nifty;
     private List<Element> layers;
     private List<Element> panels;
     private List<Element> buttons;
     private Element closest;
+    private final PieMenu pieMenu;
+
+    PieMenuController(PieMenu pieMenu) {
+        this.pieMenu = pieMenu;
+    }
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
@@ -56,7 +61,7 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
             }
 
         } else {
-            System.out.println("no controls");
+            // System.out.println("no controls");
         }
         //TODO: implement behavior during runtime
     }
@@ -106,4 +111,9 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
         Vector2f controlPosition = new Vector2f(x, y);
         return controlPosition;
     }
+
+    public void onButtonClicked(String name) {
+        pieMenu.onButtonClicked(name);
+    }
+
 }
