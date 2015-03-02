@@ -22,12 +22,14 @@ import de.lessvoid.nifty.Nifty;
  *
  * @author normenhansen
  */
-public class Main extends SimpleApplication implements PieMenu{
+public class Main extends SimpleApplication implements PieMenu {
 
     public static final String MAIN_BUTTON = "main_button";
     public static final String PIE_MENU_ID = "pie.menu";
     public static final String SCREEN_ID = "pie.menu.screen";
-    public static final String TRANSLATE = "Translate";
+    public static final String Option1 = "Change Color";
+    public static final String Option2 = "Rotate";
+    public static final String Option3 = "Nothing";
 
     public static void main(String[] args) {
         Main app = new Main();
@@ -41,8 +43,10 @@ public class Main extends SimpleApplication implements PieMenu{
     private float menuReload = 1001;
 
     @Override
-    public void simpleInitApp() {       
-        initCrossHairs(); // a "+" in the middle of the screen to help aiming
+    public void simpleInitApp() {
+        initCrossHairs(); // a "+" in the middle of the screen to help aiming       
+        //flyCam.setEnabled(false);
+        inputManager.setCursorVisible(true);
         initGeometry();
 
         // Set up the nifty specific stuff
@@ -59,14 +63,13 @@ public class Main extends SimpleApplication implements PieMenu{
 
         // Set up the pie menu
         PieMenuBuilder menu = new PieMenuBuilder(nifty, PIE_MENU_ID, this);
-        menu.addButton(TRANSLATE);
-        menu.addButton("Rotate");
-        menu.addButton("Scale");
-        
+        menu.addButton(Option1);
+        menu.addButton(Option2);
+        menu.addButton(Option3);
+
         nifty.addScreen(SCREEN_ID, menu.build());
         getStateManager().attach(menu.getController());
 
-        nifty.registerMouseCursor("hand", "Interface/mouse-cursor-hand.png", 5, 4);
         nifty.setDebugOptionPanelColors(true);
 
     }
@@ -74,7 +77,6 @@ public class Main extends SimpleApplication implements PieMenu{
      * Defining the "Shoot" action: Determine what was hit and how to respond.
      */
     private ActionListener actionListener = new ActionListener() {
-        
         @Override
         public void onAction(String name, boolean keyPressed, float tpf) {
 
@@ -94,7 +96,7 @@ public class Main extends SimpleApplication implements PieMenu{
                     inputManager.deleteMapping("Shoot");
                     menuEnabled = false;
                 }
-                
+
             }
         }
     };
@@ -102,12 +104,12 @@ public class Main extends SimpleApplication implements PieMenu{
     @Override
     public void simpleUpdate(float tpf) {
 
-        if (menuEnabled && !inputManager.hasMapping("Shoot") && menuReload > 0.5) {                        
+        if (menuEnabled && !inputManager.hasMapping("Shoot") && menuReload > 0.5) {
             System.out.println("init keys");
-             initKeys();
-        } else if (menuEnabled && !inputManager.hasMapping("Shoot") ) {
+            initKeys();
+        } else if (menuEnabled && !inputManager.hasMapping("Shoot")) {
             menuReload = menuReload + tpf;
-            System.out.println("waiting " + menuReload);
+            // System.out.println("waiting " + menuReload);
         }
     }
 
@@ -153,11 +155,19 @@ public class Main extends SimpleApplication implements PieMenu{
     }
 
     public void onButtonClicked(String name) {
-        if (name.equalsIgnoreCase(TRANSLATE)) {
+        if (name.equalsIgnoreCase(Option1)) {
+            selected.getMaterial().setColor("Color", ColorRGBA.randomColor());
+        } else if (name.equalsIgnoreCase(Option2)) {
+            selected.rotate(0.3f, 0.3f, 0f);
+        } else if (name.equalsIgnoreCase(Option3)) {
             selected.getMaterial().setColor("Color", ColorRGBA.randomColor());
         }
         nifty.exit();
         flyCam.setDragToRotate(false);
+        
+        // inputManager.setCursorVisible(false);
+
         menuEnabled = true;
+        // nifty.getNiftyMouse().resetMouseCursor(); // seems not to work...
     }
 }

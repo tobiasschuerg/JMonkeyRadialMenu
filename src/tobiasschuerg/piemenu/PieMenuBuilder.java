@@ -54,7 +54,7 @@ public class PieMenuBuilder {
                         
                         height("80%");
                         width("60%");                        
-                        interactOnClickMouseMove("checkMouse()");
+                        interactOnClick("onMouseClick()");
 
                         // Main Button
                         control(new ButtonBuilder(MAIN_BUTTON_ID, mTextMainButton) {

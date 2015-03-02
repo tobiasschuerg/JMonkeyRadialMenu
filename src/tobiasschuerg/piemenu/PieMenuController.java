@@ -92,8 +92,9 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void checkMouse() { 
-        // app.stop();
+    public void onMouseClick() { 
+        System.out.println("No button touched, closest button is " + closest.getId());
+        closest.onClick();               
     }
 
     private void setClosestControl(Element c) {
@@ -113,6 +114,7 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
     }
 
     public void onButtonClicked(String name) {
+        System.out.println("Performing button click " + closest.getId());
         pieMenu.onButtonClicked(name);
     }
 

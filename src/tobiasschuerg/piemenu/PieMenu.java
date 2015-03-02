@@ -8,7 +8,7 @@ package tobiasschuerg.piemenu;
  *
  * @author Tobias
  */
-interface PieMenu {
+public interface PieMenu {
     
     public void onButtonClicked(String name);
     
