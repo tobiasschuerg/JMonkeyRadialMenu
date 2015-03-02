@@ -22,7 +22,7 @@ import de.lessvoid.nifty.Nifty;
  *
  * @author normenhansen
  */
-public class Main extends SimpleApplication implements PieMenu {
+public class Main extends SimpleApplication implements PieMenuInterface {
 
     public static final String MAIN_BUTTON = "main_button";
     public static final String PIE_MENU_ID = "pie.menu";

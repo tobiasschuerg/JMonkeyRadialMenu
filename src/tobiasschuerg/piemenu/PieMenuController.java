@@ -20,16 +20,16 @@ import java.util.List;
  *
  * @author Tobias Schürg
  */
-public class PieMenuController extends AbstractAppState implements ScreenController, PieMenu {
+public class PieMenuController extends AbstractAppState implements ScreenController, PieMenuInterface {
 
     private Nifty nifty;
     private List<Element> layers;
     private List<Element> panels;
     private List<Element> buttons;
     private Element closest;
-    private final PieMenu pieMenu;
+    private final PieMenuInterface pieMenu;
 
-    PieMenuController(PieMenu pieMenu) {
+    PieMenuController(PieMenuInterface pieMenu) {
         this.pieMenu = pieMenu;
     }
 

@@ -32,7 +32,7 @@ public class PieMenuBuilder {
     private final PieMenuController mController;
     private List<ControlBuilder> buttons;
 
-    public PieMenuBuilder(Nifty nifty, String id, PieMenu pieMenu) {
+    public PieMenuBuilder(Nifty nifty, String id, PieMenuInterface pieMenu) {
         this.mTextMainButton = "Menu";
         mNifty = nifty;
         mController = new PieMenuController(pieMenu);
