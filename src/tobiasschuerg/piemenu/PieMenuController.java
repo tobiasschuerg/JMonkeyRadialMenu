@@ -35,14 +35,14 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
 
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
-        super.initialize(stateManager, app);    
+        super.initialize(stateManager, app);
     }
 
     @Override
     public void update(float tpf) {
         if (buttons != null) {
 
-            Vector2f cursor  = new Vector2f(nifty.getNiftyMouse().getX(), nifty.getNiftyMouse().getY());
+            Vector2f cursor = new Vector2f(nifty.getNiftyMouse().getX(), nifty.getNiftyMouse().getY());
 
             float dist = cursor.distance(getElementCenter(closest));
             for (Element c : buttons) {
@@ -78,23 +78,22 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
         this.nifty = nifty;
         this.layers = screen.getLayerElements();
         this.panels = layers.get(0).getElements();
-        
+
         List<Element> controls = panels.get(0).getElements();
         this.buttons = controls.get(1).getElements();
-        setClosestControl(controls.get(0));  
+        setClosestControl(controls.get(0));
     }
 
     public void onStartScreen() {
-
     }
 
     public void onEndScreen() {
         // throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void onMouseClick() { 
+    public void onMouseClick() {
         System.out.println("No button touched, closest button is " + closest.getId());
-        closest.onClick();               
+        closest.onClick();
     }
 
     private void setClosestControl(Element c) {
@@ -117,5 +116,4 @@ public class PieMenuController extends AbstractAppState implements ScreenControl
         System.out.println("Performing button click " + closest.getId());
         pieMenu.onButtonClicked(name);
     }
-
 }
